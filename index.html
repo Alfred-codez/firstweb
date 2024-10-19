@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <link rel="stylesheet" href="style.css">
+</head>  
+<body>
+    <div class="container">
+        <h2>Login</h2>             
+        <div id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button id="btn" onclick="login()">Login</button>
+            <p>Don't have an account? <span onclick="showSignUp()">Create one</span></p>
+        </div>
+
+        <div id="signUpForm" style="display:none;">
+            <h2>Sign Up</h2>
+            <input type="email" id="signUpEmail" placeholder="Email" required>
+            <input type="password" id="signUpPassword" placeholder="Password" required>
+            <button onclick="signUp()">Sign Up</button>
+            <p>Already have an account? <span onclick="showLogin()">Login</span></p>
+        </div>
+    </div>
+    <script>
+
+let users = {}; 
+
+function showSignUp() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signUpForm').style.display = 'block';
+}
+
+function showLogin() {
+    document.getElementById('signUpForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+}
+
+function signUp() {
+    const email = document.getElementById('signUpEmail').value;
+    const password = document.getElementById('signUpPassword').value;
+
+    if (users[email]) {
+        alert("Account already exists. Please login.");
+    } else {
+        users[email] = password;
+        alert("Sign up successful! You can now login.");
+        showLogin();
+    }
+}
+
+function login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    if (users[email] && users[email] === password) {
+        alert("Login successful!");
+    } else {
+        alert("Email or password is not correct.");
+    }
+}
+
+    document.querySelector('#btn').addEventListener("click", function() {
+        location.href = "webpage.html"
+    })
+
+    </script>
+</body>
+</html>
